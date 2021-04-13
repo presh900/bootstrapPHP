@@ -1,0 +1,16 @@
+{
+    "name": "presh900/bootstrapPHP",
+    "type": "library",
+    "description": "Create Bootstrap UI interfaces dynamically with PHP",
+    "keywords": ["bootstrap","PHP","UI","bootstrap 5"],
+    "homepage": "https://ebube.pro",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Iwuoha Precious Ebube",
+            "email": "self@ebube.pro",
+            "homepage": "http://ebube.pro",
+            "role": "Developer"
+        }
+    ],
+}
