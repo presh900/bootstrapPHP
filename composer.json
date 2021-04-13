@@ -1,16 +1,97 @@
 {
-    "name": "presh900/bootstrapPHP",
+    "name": "bootstrapphp/bootstrapphp",
     "type": "library",
-    "description": "Create Bootstrap UI interfaces dynamically with PHP",
-    "keywords": ["bootstrap","PHP","UI","bootstrap 5"],
-    "homepage": "https://ebube.pro",
+    "description": "A way to create dynamic bootstrap ui interfaces with PHP",
+    "keywords": [
+        "bootstrap",
+        "php",
+        "ui",
+        "composer",
+        "dynamic"
+    ],
     "license": "MIT",
     "authors": [
         {
             "name": "Iwuoha Precious Ebube",
-            "email": "self@ebube.pro",
-            "homepage": "http://ebube.pro",
-            "role": "Developer"
+            "email": "ipresh900@gmail.com",
+            "homepage": "https://www.ebube.pro"
         }
     ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "composer/composer": "^1.10",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+        "ergebnis/composer-normalize": "^2.5",
+        "hamcrest/hamcrest-php": "^2",
+        "mockery/mockery": "^1.3",
+        "php-parallel-lint/php-parallel-lint": "^1.2",
+        "phpstan/extension-installer": "^1",
+        "phpstan/phpstan": "^0.12.25",
+        "phpstan/phpstan-mockery": "^0.12.5",
+        "phpstan/phpstan-phpunit": "^0.12.8",
+        "phpunit/phpunit": "^9.1",
+        "psy/psysh": "^0.10.4",
+        "slevomat/coding-standard": "^6.3",
+        "squizlabs/php_codesniffer": "^3.5",
+        "vimeo/psalm": "^3.11"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "BootstrapPHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BootstrapPHP\\Console\\": "resources/console/",
+            "BootstrapPHP\\Test\\": "tests/"
+        },
+        "files": [
+            "vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php"
+        ]
+    },
+    "scripts": {
+        "BTP:analyze": [
+            "@BTP:analyze:phpstan",
+            "@BTP:analyze:psalm"
+        ],
+        "BTP:analyze:phpstan": "phpstan analyse --no-progress",
+        "BTP:analyze:psalm": "psalm --diff --diff-methods --show-info=true --config=psalm.xml",
+        "BTP:build:clean": "git clean -fX build/.",
+        "BTP:build:clear-cache": "git clean -fX build/cache/.",
+        "BTP:lint": [
+            "parallel-lint src tests",
+            "phpcs --cache=build/cache/phpcs.cache"
+        ],
+        "BTP:lint:fix": "./bin/lint-fix.sh",
+        "BTP:repl": [
+            "echo ; echo 'Type ./bin/repl to start the REPL.'"
+        ],
+        "BTP:test": "phpunit",
+        "BTP:test:all": [
+            "@BTP:lint",
+            "@BTP:analyze",
+            "@BTP:test"
+        ],
+        "BTP:test:coverage:ci": "phpunit --coverage-clover build/logs/clover.xml",
+        "BTP:test:coverage:html": "phpunit --coverage-html build/coverage"
+    },
+    "scripts-descriptions": {
+        "BTP:analyze": "Performs static analysis on the code base.",
+        "BTP:analyze:phpstan": "Runs the PHPStan static analyzer.",
+        "BTP:analyze:psalm": "Runs the Psalm static analyzer.",
+        "BTP:build:clean": "Removes everything not under version control from the build directory.",
+        "BTP:build:clear-cache": "Removes everything not under version control from build/cache/.",
+        "BTP:lint": "Checks all source code for coding standards issues.",
+        "BTP:lint:fix": "Checks source code for coding standards issues and fixes them, if possible.",
+        "BTP:repl": "Note: Use ./bin/repl to run the REPL.",
+        "BTP:test": "Runs the full unit test suite.",
+        "BTP:test:all": "Runs linting, static analysis, and unit tests.",
+        "BTP:test:coverage:ci": "Runs the unit test suite and generates a Clover coverage report.",
+        "BTP:test:coverage:html": "Runs the unit tests suite and generates an HTML coverage report."
+    }
 }
